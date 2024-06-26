@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Web3 from "web3";
-import contract from "../contract/beatwave.json";
+import contract from "../../../containers/Contract/betawave/beatwave.json"
 import { FcMoneyTransfer } from "react-icons/fc";
 import { MdOutlineSubtitles } from "react-icons/md";
-import { FcManager } from "react-icons/fc";
-import Controls from "./Controls/Controls";
-import Love from "./Love/Love";
-import ButtonBuy from "./Buy/ButtonBuy";
+import Love from "../Love/Love";
+import ButtonView from "../Button/ButtomView";
 
 const contractABI = contract.abi;
 const contractAddress = contract.address;
@@ -25,7 +23,7 @@ interface ID {
   index: number;
 }
 
-const Card: React.FC<ID> = ({ index }) => {
+const CardMini: React.FC<ID> = ({ index }) => {
   const [beat, setBeat] = useState<Beat | null>(null);
   const [show, setShow] = useState(false);
 
@@ -63,48 +61,29 @@ const Card: React.FC<ID> = ({ index }) => {
     setLike(inc);
   };
 
-  const uri =
-    "https://cellphones.com.vn/sforum/wp-content/uploads/2024/02/avatar-anh-meo-cute-1.jpg";
-
   return (
     <>
-      {show && (
+      {show ? (
         <div style={styles.card}>
           {beat ? (
             <div>
-              <img
-                src={uri}
-                alt="Avatar"
-                style={styles.avatar as React.CSSProperties}
-              />
-              {/* <p>
-                <strong>CID:</strong> {beat.cid}
-              </p> */}
               <div style={styles.title}>
                 <MdOutlineSubtitles style={styles.icon} />
                 <p>{beat.title}</p>
-              </div>
-              <p>
-                <FcManager /> {beat.owner}
-              </p>
-              <div style={styles.container}>
-                <Controls
-                  src={
-                    "https://ipfs.io/ipfs/QmWSfYwr4ZoXz6s6ncCj5GA58A3aNS8DtaMJSch1VEPwG8"
-                  }
-                />
                 <Love count={0} />
               </div>
               <div style={styles.price}>
                 <FcMoneyTransfer style={styles.icon} />
                 <p style={styles.priceText}>{Number(beat.price)} TBNB</p>
-                <ButtonBuy />
+                <ButtonView id={index} />
               </div>
             </div>
           ) : (
             <p>Loading...</p>
           )}
         </div>
+      ) : (
+        "Not Found ID"
       )}
     </>
   );
@@ -112,25 +91,11 @@ const Card: React.FC<ID> = ({ index }) => {
 
 const styles = {
   card: {
-    width: "400px",
-    height: "400px",
+    width: "250px",
+    height: "110px",
     backgroundColor: "#F19373",
     borderRadius: "20px",
     margin: "10px",
-  },
-  avatar: {
-    width: "180px",
-    height: "180px",
-    borderRadius: "50%",
-    objectFit: "cover",
-    paddingTop: "10px",
-  },
-  container: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "10px",
-    margin: "0px",
   },
   icon: {
     fontSize: "24px",
@@ -146,6 +111,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    gap: "10px",
   },
   price: {
     display: "flex",
@@ -153,10 +119,10 @@ const styles = {
     justifyContent: "center",
   },
   priceText: {
-    fontSize: "16px", 
-    color: "#555", 
-    marginRight: "10px", 
+    fontSize: "16px",
+    color: "#555",
+    marginRight: "10px",
   },
 };
 
-export default Card;
+export default CardMini;

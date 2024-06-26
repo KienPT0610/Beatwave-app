@@ -1,26 +1,21 @@
 import React, { createContext, useState } from "react";
-import ReadContract from "../ReadContract/ReadContract";
-import SearchBeatID from "../ReadContract/SearchBeats";
-import ReactAudioPlayer from "react-audio-player";
+import ReadContract from "../../../containers/Contract/ContractData/ReadContract/ReadInforContract";
+import CardMini from "../../Card/CardSize/CardMini";
 
-const Body = () => {
+interface Search {
+  onSetIndex: (index: number) => void;
+}
+
+const Body: React.FC<Search> = ({onSetIndex}) => {
   const [showSearch, setShowSearch] = useState(true);
 
   return (
     <>
-      <ReadContract />;
+      <ReadContract/>
       <div style={styles.menu as React.CSSProperties}>
         {showSearch && (
           <>
-            <SearchBeatID index={1} />
-            <SearchBeatID index={1} />
-            <SearchBeatID index={1} />
-            <SearchBeatID index={1} />
-            <SearchBeatID index={1} />
-            <SearchBeatID index={1} />
-            <SearchBeatID index={1} />
-            <SearchBeatID index={1} />
-            <SearchBeatID index={1} />
+            <CardMini index={1}/>
           </> 
         )}
       </div>
@@ -34,7 +29,7 @@ const styles = {
     flexWrap: "wrap",
     flex: "0 0 auto",
     padding: "10px",
-    justifyContent: "center",
+    // justifyContent: "center",
   },
 };
 

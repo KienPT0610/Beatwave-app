@@ -1,7 +1,7 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext, Children } from "react";
 import Web3 from "web3";
 import { RegisteredSubscription } from "web3/lib/commonjs/eth.exports";
-import ReadContract from "../Home/ReadContract/ReadContract";
+import Account from "../../components/Header/Wallet/Account";
 
 declare global {
   interface Window {
@@ -9,10 +9,8 @@ declare global {
   }
 }
 
-const MetaMaskContext = createContext<any>(null);
-export const useMetaMask = () => useContext(MetaMaskContext);
 
-const MetaMaskConnection = ({ children }: { children: React.ReactNode }) => {
+const MetaMaskConnection = () => {
   const [account, setAccount] = useState<string | null>(null);
   const [balance, setBalance] = useState<string | null>(null);
   const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(false);
@@ -79,56 +77,10 @@ const MetaMaskConnection = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  return (
-    <MetaMaskContext.Provider
-      value={{ account, balance, handleConnectMetaMask, disconnectMetaMask }}
-    >
-      <div style={styles.accountInfo}>
-        {account && (
-          <>
-            <span style={styles.account}>{account}</span>
-            <span style={styles.balance}>{balance} ETH</span>
-          </>
-        )}
-        {account ? (
-          <button onClick={disconnectMetaMask} style={styles.button}>
-            Disconnect
-          </button>
-        ) : (
-          <button onClick={handleConnectMetaMask} style={styles.button}>
-            Connect to MetaMask
-          </button>
-        )}
-      </div>
-    </MetaMaskContext.Provider>
-  );
-};
 
-const styles = {
-  accountInfo: {
-    display: "flex",
-    alignItems: "center",
-  },
-  account: {
-    marginRight: "10px",
-    padding: "10px",
-    backgroundColor: "#e9ecef",
-    borderRadius: "5px",
-  },
-  balance: {
-    marginRight: "10px",
-    padding: "10px",
-    backgroundColor: "#e9ecef",
-    borderRadius: "5px",
-  },
-  button: {
-    padding: "10px 20px",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
+  return (
+    <Account account={account} balance={balance} disconnectMetaMask={disconnectMetaMask} handleConnectMetaMask={handleConnectMetaMask} />
+  );
 };
 
 export default MetaMaskConnection;

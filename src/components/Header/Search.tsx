@@ -1,7 +1,10 @@
 import React, { useState, useEffect, CSSProperties } from "react";
-import Card from "../Card/Card";
+import Card from "../Card/CardSize/CardBig";
+import { useNavigate } from "react-router-dom";
 
-const Search = () => {
+
+
+const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleInputChange = (event: { target: { value: any } }) => {
@@ -11,13 +14,15 @@ const Search = () => {
     }
   };
 
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     const number = Number(searchTerm);
     if (!isNaN(number)) {
       console.log("Số bạn đã nhập là:", number);
       //xu li so
-        
+      // clickFind(number);
+      navigate(`/card/${number}`);
     } else {
       console.error("Giá trị nhập vào không phải là số hợp lệ.");
     }
@@ -52,7 +57,7 @@ const styles = {
   button: {
     marginLeft: "10px",
     padding: "10px 20px",
-    backgroundColor: "#007bff",
+    backgroundColor: "#F19373",
     color: "white",
     border: "none",
     borderRadius: "20px",
