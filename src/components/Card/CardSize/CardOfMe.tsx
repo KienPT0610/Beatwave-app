@@ -4,6 +4,8 @@ import { MdOutlineSubtitles } from "react-icons/md";
 import Controls from "../Controls/Controls";
 import Love from "../Love/Love";
 import { getAvataUrl } from "../../../containers/Avata/AvataURL";
+import ButtonSale from "../Button/ButtonSale";
+import ButtonTransfer from "../Button/ButtonTransfer";
 
 interface Beat {
   index: number;
@@ -36,7 +38,7 @@ const CardOfMe: React.FC<Beat> = ({
         style={styles.avatar as React.CSSProperties}
       />
       <div style={styles.block1}>
-        <p>ID: {index}</p>
+        <b>ID: {index}</b>
         <p>{owner}</p>
         <p style={styles.title}>
           <MdOutlineSubtitles />
@@ -47,7 +49,7 @@ const CardOfMe: React.FC<Beat> = ({
           <Love count={0} />
         </div>
         <div style={{ display: "flex" }}>
-          <p style={{ marginRight: "5px" }}>Trạng Thái: </p>
+          <b style={{ marginTop: "16px", marginRight: '10px' }}>Trạng Thái: </b>
           {isForSale ? (
             <p>
               Đang bán giá {Number(price)} <CiBitcoin />
@@ -57,7 +59,10 @@ const CardOfMe: React.FC<Beat> = ({
           )}
         </div>
       </div>
-      <div style={styles.block2}></div>
+      <div style={styles.block2}>
+        <ButtonSale />
+        <ButtonTransfer id={index} owner={owner} />
+      </div>
     </div>
   );
 };
@@ -95,6 +100,7 @@ const styles = {
     width: "100%",
     // backgroundColor: "red",
     margin: "10px",
+    alignContent: 'center',
   },
   container: {
     display: "flex",

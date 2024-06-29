@@ -54,7 +54,7 @@ const styles = {
   },
   button: {
     padding: "10px 20px",
-    backgroundColor: "#F19373",
+    backgroundColor: "#FF6A6A",
     color: "white",
     border: "none",
     borderRadius: "5px",

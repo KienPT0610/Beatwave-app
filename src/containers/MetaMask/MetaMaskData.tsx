@@ -60,7 +60,7 @@ const MetaMaskConnection = () => {
     setAccount(null);
     setBalance(null);
   };
-
+  
   const handleConnectMetaMask = async () => {
     try {
       await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -69,6 +69,7 @@ const MetaMaskConnection = () => {
       const defaultAccount = accounts[0];
       setAccount(defaultAccount);
       await getBalance(defaultAccount, web3);
+      window.location.reload();
     } catch (error) {
       console.error("Failed to connect to MetaMask:", error);
       alert(

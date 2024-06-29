@@ -34,7 +34,7 @@ const styles = {
   icon: {
     fontSize: "24px", 
     marginRight: "5px", 
-    color: "#B2001F", 
+    color: "#FF6A6A", 
   },
 };
 

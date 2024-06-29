@@ -14,7 +14,7 @@ const styles = {
   container: {
     borderTop: '1px solid #D7D7D7',
     borderBottom: '1px solid #D7D7D7',
-    backgroundColor: '#FCD9C4',
+    // backgroundColor: '#FCD9C4',
     height: '1000px',
   }
 }
